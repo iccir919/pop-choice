@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ChipSelect from "./ChipSelect.jsx"
 
-export default function Questionnaire({ onSubmit }) {
+export default function Questionnaire({ handleQuestionnaire }) {
 
     const [questionnaire, setQuestionnaire] = useState({
         favoriteMovie: "",
@@ -12,7 +12,7 @@ export default function Questionnaire({ onSubmit }) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        onSubmit(questionnaire);
+        handleQuestionnaire(questionnaire);
     }
 
     function update (key, value) {

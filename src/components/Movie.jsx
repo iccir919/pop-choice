@@ -5,11 +5,11 @@ export default function Movie({ movie }) {
 
     const { title, year, description } = parseMovieContent(movie.content);
     const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-    console.log(TMDB_API_KEY);
 
     useEffect(() => {
         async function getPoster() {
             const posterUrl = await fetchMoviePoster(title, year, TMDB_API_KEY);
+            setPoster(posterUrl);
         }
 
         getPoster();
@@ -17,8 +17,17 @@ export default function Movie({ movie }) {
 
     return (
         <div className="movie">
-            <h1>{title} ({year})</h1>
-            <p>{description}</p>
+            <h1 className="movie-title">{title} ({year})</h1>
+            {poster ? (
+                <img 
+                    src={poster} 
+                    alt={`Poster for ${title}`} 
+                    className="movie-poster"
+                />
+            ) : (
+                <p>No poster available</p>
+            )}
+            <p className="movie-description">{description}</p>
         </div>
     );
 }
@@ -47,5 +56,10 @@ async function fetchMoviePoster(title, year, apiKey) {
     const response = await fetch(url);
     const data = await response.json();
 
-    console.log(data)
+    if (data.results?.length > 0) {
+        return `https://image.tmdb.org/t/p/w500${data.results[0].poster_path}`;
+    }
+
+    return null;
+
 }

@@ -1,19 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 
 body {
   display: flex;
   justify-content: center;
+  background: #000C36;
+  font-family: "Roboto Slab", serif;
+  color: white;
 }
 
 .app {
-  width: 400px;
-  height: 100vh;
-  padding: 1.5em;
+  height: 100%;
+  max-width: 420px;
+  padding: 2em;
   background: #000C36;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -26,7 +36,7 @@ header {
 }
 
 .app-title {
-  margin-top: .5em;
+  margin-top: 0;
   margin-bottom: .1em;
 }
 
@@ -37,7 +47,7 @@ header {
 }
 
 .landing {
-  height: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,15 +61,26 @@ form {
 .questionnaire {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.5em;
 }
 
 label, legend {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
 }
 
-.chip-select-options, textarea {
-  margin-top: 0.5em;
+
+textarea {
+  width: 100%;
+  resize: none;
+  background: #3B4877;
+  border: none;
+  border-radius: 0.25em;
+  padding: 0.75em;
+  font-family: "Roboto Slab", serif;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  letter-spacing: .05rem;
+  color: white;
 }
 
 .chip-select {
@@ -69,61 +90,82 @@ label, legend {
 
 .chip-select-options {
   display: flex;
-  gap: 1em;
+  flex-wrap: wrap;
+  gap: 0.75em;
 }
 
 .chip-select-option {
   border: none;
   border-radius: 0.75em;
+  background: #3B4877;
   padding: 0.5em 0.75em;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 input[type="radio"] {
   display: none;
 }
 
-textarea {
-  display: inline-block;
-  width: 90%;
-  resize: none;
-  background: #3B4877;
-  border: none;
-  border-radius: 0.25em;
-  padding: 0.75em;
-  font-family: "Roboto Slab", serif;
-  font-weight: 300;
-  font-size: .95rem;
-  line-height: 1.25;
-  letter-spacing: .1rem;
+.chip-select-option:hover,
+input[type="radio"]:checked + .chip-select-option {
+  background: #55619b;
 }
 
 button[type="submit"] {
   margin-top: 1em;
 }
 
-.recommendations {
+
+.loading {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1em;
   justify-content: center;
+  font-size: 1.5rem;
+  text-align: center; 
+}
+
+.recommendations {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
+  gap: 1em;
+}
+
+.movie-title {
+  margin-top: 0.25em;
+  margin-bottom: 0.75em;
+  font-size: 1.25rem;
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 0.5em;
+}
+
+.movie-description {
+  margin-top: 0.75em;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 button {
   padding: 0.75em 1em;
-  display: block;
   width: 100%;
   background: #51E08A;
   border: none;
   border-radius: 0.25em;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  font-family: "Roboto Slab", serif;
   cursor: pointer;
-  transition: background 0.3s ease;
-  transition: color 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 button:hover {
@@ -131,10 +173,9 @@ button:hover {
     color: white;
 }
 
-body, textarea {
+body, textarea, .loading {
     font-family: "Roboto Slab", serif;
     color: white;
 }
-
 
 
