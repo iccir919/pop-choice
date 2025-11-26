@@ -4,21 +4,26 @@ export default function ChipSelect({ label, name, options, value, onChange }) {
             <legend>{label}</legend>
 
             <div className="chip-select-options">
-                {options.map(option => (
-                    <label 
-                        style={{ background: value === option ? "#5264A6" : "#3B4877" }}
-                        className="chip-select-option"
-                        key={option}>
-                            <input
-                                type="radio"
-                                name={name}
-                                value={option}
-                                checked={value === option}
-                                onChange={() => onChange(option)}
-                            />
-                            {option}
-                    </label>
-                ))}
+                {options.map(option => {
+                    const optionId = `${name}-${option}`;
+                    return (
+                        <div key={optionId}>
+                            <label 
+                                key={option}
+                                className="chip-select-option"
+                            >
+                                <input
+                                    type="radio"
+                                    name={name}
+                                    value={option}
+                                    checked={value === option}
+                                    onChange={() => onChange(option)}
+                                />
+                                {option}
+                            </label>
+                        </div>
+                    )
+                })}
             </div>
         </fieldset>
     )

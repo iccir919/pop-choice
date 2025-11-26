@@ -9,7 +9,7 @@ export default function Header() {
           className="app-logo"
         />
         <h1 className="app-title">Aronofsky Advisor</h1>
-        <p className="sub-title">Discover the Darren Aronofsky movie for you!</p>
+        <p className="sub-title">Let's find a Darren Aronofsky movie for you!</p>
       </header>
     )
 }

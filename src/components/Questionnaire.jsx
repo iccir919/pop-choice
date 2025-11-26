@@ -8,19 +8,39 @@ export default function Questionnaire({ handleQuestionnaire }) {
         timeframe: "",
         mood: "",
         actor: ""
-    })
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        handleQuestionnaire(questionnaire);
-    }
+    });
+    const [validationError, setValidationError] = useState(null);
 
     function update (key, value) {
         setQuestionnaire(prev => ({ ...prev, [key]: value}));
     }
 
+    function handleSubmit(event) {
+        event.preventDefault();
+        setValidationError(null);
+
+        const required = ["favoriteMovie", "timeframe", "mood", "actor"];
+        for (const field of required) {
+            if (!questionnaire[field].trim()) {
+                setValidationError("Please fill out all fields before submitting.");
+                return;
+            }
+
+            if (questionnaire[field].length > 200) {
+                setValidationError("Please keep your answers under 200 characters.");
+                return;
+            }
+        }
+
+        handleQuestionnaire(questionnaire);
+    }
+
     return (
         <form className="questionnaire" onSubmit={handleSubmit}>
+            {validationError && (
+                <p className="validation-error">{validationError}</p>
+            )}
+
             <div>
                 <label htmlFor="favoriteMovie">What’s your favorite movie and why?</label>
                 <textarea
